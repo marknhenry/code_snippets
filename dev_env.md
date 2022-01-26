@@ -3,10 +3,10 @@
 docker rm nifty_blackwell
 docker run -it -d --name nifty_blackwell "python:latest"
 docker exec -it nifty_blackwell /bin/bash
-apt-get update -y
-apt-get upgrade
-apt-get install sudo
-sudo apt-get install curl
+# apt-get update -y
+# apt-get upgrade
+# apt-get install sudo
+apt-get install curl
 cd /tmp
 curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash ./Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
