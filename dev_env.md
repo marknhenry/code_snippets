@@ -23,5 +23,6 @@ conda install nb_conda flask flask-sqlalchemy flask-wtf flask-bcrypt flask-login
 # Creating Docker Image
 docker commit nifty_blackwell
 docker tag 3f79d016fa81 marknhenry/mh-docker-repo:latest
-docker push marknhenry/mh-docker-repo:latestDocker stop nifty_blackwell
+docker push marknhenry/mh-docker-repo:latest
+docker stop nifty_blackwell
 ```
