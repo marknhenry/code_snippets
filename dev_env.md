@@ -9,6 +9,7 @@ docker exec -it nifty_blackwell /bin/bash
 apt-get install curl
 cd /tmp
 curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+rm -rf /var/lib/apt/lists/*
 bash ./Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=~/miniconda/bin:$PATH
 conda update -n base -c defaults conda -y
