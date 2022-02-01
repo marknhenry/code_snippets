@@ -6,12 +6,14 @@ docker exec -it nifty_blackwell /bin/bash
 # apt-get update -y
 # apt-get upgrade
 # apt-get install sudo
-apt-get install curl
-cd /tmp
-curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+# apt-get install curl
+# cd /tmp
 rm -rf /var/lib/apt/lists/*
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash ./Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=~/miniconda/bin:$PATH
+conda init bash
+# log out then back in
 conda update -n base -c defaults conda -y
 conda create --name nif_black_env python=3.8 -y
 source activate nif_black_env
