@@ -1,4 +1,3 @@
-# Has the following: 
 ``` bash
 docker rm nifty_blackwell
 docker run -it -d --name nifty_blackwell "python:latest"
@@ -29,4 +28,9 @@ docker commit nifty_blackwell
 docker tag 3f79d016fa81 marknhenry/mh-docker-repo:latest
 docker push marknhenry/mh-docker-repo:latest
 docker stop nifty_blackwell
+```
+
+``` python
+import timeit
+print(timeit.timeit(stmt="[0,1,2,3,4]", number=1000000))
 ```
