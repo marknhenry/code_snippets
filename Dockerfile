@@ -15,6 +15,6 @@ RUN wget \
 RUN conda --version
 
 RUN conda update -n base -c defaults conda -y \
-  && conda install -y tensorflow-cpu \
+  && conda install -y tensorflow \
   && conda clean -a \
   && conda init bash
