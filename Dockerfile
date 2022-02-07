@@ -1,24 +1,24 @@
 FROM tensorflow/tensorflow:latest-py3-jupyter
-# FROM tensorflow/tensorflow:latest-gpu-py3-jupyter
 
-ARG username=marknhenry
-ARG groupid=1000
-ARG userid=1000
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN apt-get update
 
-RUN apt-get update && apt-get install -y \
-  graphviz \
-  libgraphvis-dev \
-  git
-  
-COPY ./requirements.txt /
-RUN python3 -m pip install --upgrade pip
-RUN pip install -r /requirements.txt
+RUN apt-get install -y wget graphviz libgraphviz-dev git \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN gropuadd -g $groupid $username \
-  && useradd -m -r -u $userid -g $username $username
-USER $username
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
+RUN conda --version
 
-VOLUME ["/gans"]
-WORKDIR /GDL
+RUN conda update -n base -c defaults conda -y \
+  && conda install -y tensorflow \
+  && conda clean -a
 
-CMD ["jupyter", "notebook", "--no-browser", "--ip=128.0.0.1", "--port=8899", "/gans"]
+RUN conda init bash
+
+WORKDIR /tf
+COPY ./to_copy/ /tf/
