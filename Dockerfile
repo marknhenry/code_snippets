@@ -16,9 +16,5 @@ RUN conda --version
 
 RUN conda update -n base -c defaults conda -y \
   && conda install -y tensorflow \
-  && conda clean -a
-
-RUN conda init bash
-
-WORKDIR /tf
-COPY ./to_copy/ /tf/
+  && conda clean -a \
+  && conda init bash
