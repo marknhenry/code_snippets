@@ -20,10 +20,12 @@ class style():
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # change to 2
 os.system('clear')
+print(os.getcwd())
 
 print(style.YELLOW + f'Tensorflow version: {tf.__version__}\n')
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = mnist.load_data(
+    path='/root/tf_starter_kit/data/mnist.npz')
 print(style.BLUE +
       f'Old Train Data Shapes: train: {x_train.shape} and {y_train.shape}')
 
@@ -89,16 +91,16 @@ inputs = keras.Input(shape=(flattened_dim))
 x = layers.Dense(512, activation='relu', name='optionally_layer_1')(inputs)
 x = layers.Dense(256, activation='relu')(x)
 outputs = layers.Dense(10, activation='softmax')(x)
-model = keras.Model(inputs=inputs, outputs=outputs) # to build the whole n/w
+model = keras.Model(inputs=inputs, outputs=outputs)  # to build the whole n/w
 
 
-# # If you want to debug and get outputs of specific models, then you could: 
-# model = keras.Model(inputs=model.inputs, 
+# # If you want to debug and get outputs of specific models, then you could:
+# model = keras.Model(inputs=model.inputs,
 #                     # outputs=[model.layers[-1].output] # Option 1: Output of last layer
 #                     # outputs=[model.layers[-2].output] # Option 2: Output of 2 layers back from end
 #                     # outputs=[model.get_layer('optionally_layer_1').output] # Option 3: Get layer by name
 #                     outputs=[layer.output for layer in model.layers] # Option 4: Output of 2 layers back from end
-#                     ) 
+#                     )
 
 # # for options 1-3 above
 # feature = model.predict(x_train)
@@ -106,8 +108,8 @@ model = keras.Model(inputs=inputs, outputs=outputs) # to build the whole n/w
 
 # # for option 4
 # features = model.predict(x_train)
-# for feature in features: 
-#     print(f'Shape of intermediate layer: {feature.shape}')  
+# for feature in features:
+#     print(f'Shape of intermediate layer: {feature.shape}')
 
 
 model.compile(
