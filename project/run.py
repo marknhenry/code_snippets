@@ -1,7 +1,7 @@
 import os
 import tensorflow as tf
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # change to 2
 os.system('clear')
 
 print(f'Tensorflow version: {tf.__version__}\n')
@@ -44,7 +44,17 @@ z = tf.matmul(x, y) # same as z = x @ y
 ## Indexing
 
 x = tf.constant([0,1,1,2,3,1,2,3])
-print(x[2:])
+indices = tf.constant([0,3])
+x_ind = tf.gather(x, indices)
+x = tf.constant([[1,2],[3,4],[5,6]])
+# print(x[0:2,:])
 
 ## Reshaping
+x = tf.range(9)
+x = tf.reshape(x, (3,3))
+print(x)
+y = tf.transpose(x)
+print(y)
+y = tf.transpose(x, perm=[1,0])
+print(y)
 print('\n')
