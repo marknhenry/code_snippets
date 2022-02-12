@@ -24,8 +24,8 @@ print(os.getcwd())
 
 print(style.YELLOW + f'Tensorflow version: {tf.__version__}\n')
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data(
-    path='/root/tf_starter_kit/data/mnist.npz')
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+    # path='/root/tf_starter_kit/data/mnist.npz')
 print(style.BLUE +
       f'Old Train Data Shapes: train: {x_train.shape} and {y_train.shape}')
 
