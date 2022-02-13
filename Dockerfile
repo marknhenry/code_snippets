@@ -4,7 +4,7 @@ ENV PATH="/root/miniconda3/bin:${PATH}"
 ARG PATH="/root/miniconda3/bin:${PATH}"
 RUN apt-get update
 
-RUN apt-get install -y wget graphviz libgraphviz-dev git \
+RUN apt-get install -y wget graphviz libgraphviz-dev unzip git \
   && rm -rf /var/lib/apt/lists/*
 
 RUN wget \
@@ -15,6 +15,7 @@ RUN wget \
 RUN conda --version
 
 RUN conda update -n base -c defaults conda -y \
-  && conda install -y tensorflow \
+  && conda install -y tensorflow tensorflow-datasets keras pandas \
+  && pip install kaggle
   && conda clean -a \
   && conda init bash
