@@ -45,23 +45,24 @@ class CNNBlock(layers.Layer):
         x = tf.nn.relu(x)
         return x
 
+# model = keras.Sequential(
+#     [CNNBlock(32), CNNBlock(64), CNNBlock(128), layers.Flatten(), layers.Dense(10),]
+# )
 
 class ResBlock(layers.Layer):
     def __init__(self, channels):
         super(ResBlock, self).__init__()
         self.channels = channels
-        self.cnn1 = CNNBlock(channels[0], 3),
-        self.cnn2 = CNNBlock(channels[1], 3),
-        self.cnn3 = CNNBlock(channels[2], 3),
-        self.pooling = layers.MaxPool2D()
-        self.identity_mapping = layers.Conv2D(channels[1], 3, padding='same')
+        self.cnn1 = CNNBlock(channels[0], 3)
+        self.cnn2 = CNNBlock(channels[1], 3)
+        self.cnn3 = CNNBlock(channels[2], 3)
+        self.pooling = layers.MaxPooling2D()
+        self.identity_mapping = layers.Conv2D(channels[1], 3, padding="same")
 
     def call(self, input_tensor, training=False):
         x = self.cnn1(input_tensor, training=training)
         x = self.cnn2(x, training=training)
-        x = self.cnn3(
-            x + self.identity_mapping(input_tensor), training=training,
-        )
+        x = self.cnn3(x + self.identity_mapping(input_tensor), training=training,)
         x = self.pooling(x)
         return x
 
@@ -72,17 +73,18 @@ class ResNet_Like(keras.Model):
         self.block1 = ResBlock([32, 32, 64])
         self.block2 = ResBlock([128, 128, 256])
         self.block3 = ResBlock([128, 256, 512])
-        self.pool = layers.GlobalAveragePooling2D() # similar to layer.Flatten()
+        self.pool = layers.GlobalAveragePooling2D()
         self.classifier = layers.Dense(num_classes)
-    
-    def call(self, input_tensor, training=False):
-        x = self.block1(input_tensor, training = training)
-        x = self.block2(x, training = training)
-        x = self.block3(x, training = training)
-        x = self.pool(x)
-        return self.classifier(x)
 
-print(style.GREEN)
+    def call(self, input_tensor, training=False):
+        x = self.block1(input_tensor, training=training)
+        x = self.block2(x, training=training)
+        x = self.block3(x, training=training)
+        x = self.pool(x, training=training)
+        x = self.classifier(x)
+        return x
+
+# print(style.GREEN)
 
 model = ResNet_Like(num_classes=10)
 
