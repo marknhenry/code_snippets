@@ -52,7 +52,7 @@ def my_model():
     x = layers.Conv2D(
         32, 3, 
         padding='same', 
-        # kernel_regularizer=regularizers.l2(0.01)
+        kernel_regularizer=regularizers.l2(0.01)
         )(inputs)
     x = layers.BatchNormalization()(x)
     x = keras.activations.relu(x) # Since we wanted to do Batch Norm before relu
@@ -60,14 +60,14 @@ def my_model():
 
     x = layers.Conv2D(64, 5, 
         padding='same',
-        # kernel_regularizer=regularizers.l2(0.01)
+        kernel_regularizer=regularizers.l2(0.01)
         )(x)
     x = layers.BatchNormalization()(x)
     x = keras.activations.relu(x)
 
     x = layers.Conv2D(128, 3, 
         padding='same', 
-        # kernel_regularizer=regularizers.l2(0.01)
+        kernel_regularizer=regularizers.l2(0.01)
     )(x)
     x = layers.BatchNormalization()(x)
     x = keras.activations.relu(x)
@@ -75,7 +75,7 @@ def my_model():
     x = layers.Flatten()(x)
     x = layers.Dense(64, 
         activation='relu', 
-        # kernel_regularizer=regularizers.l2(0.01)
+        kernel_regularizer=regularizers.l2(0.01)
         )(x)
 
     x = layers.Dropout(0.5)(x)
