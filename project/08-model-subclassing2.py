@@ -84,6 +84,10 @@ class ResNet_Like(keras.Model):
         x = self.classifier(x)
         return x
 
+    def model(self):
+        x = keras.Input(shape=(28,28,1))
+        return keras.Model(inputs=[x], outputs = self.call(x))
+
 # print(style.GREEN)
 
 model = ResNet_Like(num_classes=10)
@@ -95,5 +99,5 @@ model.compile(
 )
 
 model.fit(x_train, y_train, batch_size=64, epochs=1, )
-print(model.summary())
+print(model.model().summary())
 model.evaluate(x_test, y_test, batch_size=64, )
