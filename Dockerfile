@@ -15,7 +15,7 @@ RUN wget \
 RUN conda --version
 
 RUN conda update -n base -c defaults conda -y \
-  && conda install -y tensorflow tensorflow-datasets keras pandas \
+  && conda install -y tensorflow tensorflow-datasets keras pandas matplotlib \
   && pip install kaggle
   && conda clean -a \
   && conda init bash

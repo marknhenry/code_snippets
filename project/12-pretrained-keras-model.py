@@ -16,5 +16,20 @@ print(style.YELLOW + f'Tensorflow  version: {tf.__version__}\n')
 x = tf.random.normal(shape=(5, 299, 299, 3))
 y = tf.constant([0, 1, 2, 3, 4])
 
-model = keras.applications.InceptionV3()
+model = keras.applications.InceptionV3(include_top=True)
 print(model.summary())
+
+
+base_input = model.layers[0].input
+base_output = model.layers[-2].output
+final_output = layers.Dense(5) (base_output)
+
+new_model = keras.Model(inputs = base_input, outputs = final_output)
+print(style.GREEN, end='')
+new_model.compile(
+    loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True), 
+    optimizer = keras.optimizers.Adam(learning_rate=3e-4),
+    metrics=['accuracy']
+)
+
+new_model.fit(x, y, epochs = 1)

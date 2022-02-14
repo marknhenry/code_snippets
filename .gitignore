@@ -6,6 +6,9 @@
 # Data
 [Dd]ata/*
 
+# Models
+[Mm]odels/*
+
 # User-specific files
 *.rsuser
 *.suo
