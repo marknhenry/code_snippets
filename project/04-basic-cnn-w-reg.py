@@ -75,12 +75,13 @@ def my_model():
     x = layers.Flatten()(x)
     x = layers.Dense(64, 
         activation='relu', 
-        kernel_regularizer=regularizers.l2(0.01)
+        kernel_regularizer=regularizers.l2(0.01), 
+        name='dense_64'
         )(x)
 
     x = layers.Dropout(0.5)(x)
 
-    outputs = layers.Dense(10)(x)
+    outputs = layers.Dense(10, name='dense_10')(x)
 
     model = keras.Model(inputs = inputs, outputs = outputs)
 
@@ -90,9 +91,11 @@ model = my_model()
 
 model.compile(
     loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True), 
-    optimizer = keras.optimizers.Adam(lr=3e-4),
+    optimizer = keras.optimizers.Adam(learning_rate=3e-4),
     metrics=['accuracy']
 )
 
-model.fit(x_train[:10000], y_train[:10000], batch_size=64, epochs=20, )
+model.fit(x_train[:10000], y_train[:10000], batch_size=64, epochs=1, )
 model.evaluate(x_test[:10000], y_test[:10000], batch_size=64, )
+
+model.save('models/pretrained-cnn/')
