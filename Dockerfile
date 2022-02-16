@@ -15,9 +15,9 @@ RUN wget \
 RUN conda --version
 
 RUN conda update -n base -c defaults conda -y \
-  && conda install -y python=3.7
+  && conda install -y python=3.9
   && conda install -y tensorflow tensorflow-datasets keras\
-  && conda install -y opwncv
+  # && conda install -y opwncv
   && conda install -y pandas matplotlib scikit-learn\
   && pip install kaggle
   && conda clean -a \
