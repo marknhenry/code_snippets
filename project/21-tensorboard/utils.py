@@ -5,7 +5,6 @@ import numpy as np
 import io
 import sklearn.metrics
 from tensorboard.plugins import projector
-import cv2
 import os
 import shutil
 
