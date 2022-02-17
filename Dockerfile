@@ -19,6 +19,6 @@ RUN conda update -n base -c defaults conda -y \
   && conda install -y tensorflow tensorflow-datasets keras\
   # && conda install -y opwncv
   && conda install -y pandas matplotlib scikit-learn\
-  && pip install kaggle
+  && pip install kaggle tensorboard-plugin-profile
   && conda clean -a \
   && conda init bash
